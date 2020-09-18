@@ -34,6 +34,18 @@ count = 0
 # 計算
 # 
 
+# 残金を計算して表示する関数
+def balance(money, total_price):
+    # 合計金額が残金より小さい場合
+    if total_price < money:
+        print("残金は" + str(money - total_price) + "です")
+    # # 合計金額が残金と等しい場合
+    elif total_price == money:
+        print("残金は０です")
+    # # 合計金額が残金より大きい場合
+    elif total_price > money:
+        print("今の所持金では買えません")
+
 # 所持金を設定
 money = input("金額を入力してください")
 money = int(money)
@@ -52,12 +64,4 @@ total_price = fruits[item].price * count
 print(total_price)
 
 # 結果を表示する
-# 合計金額が残金より小さい場合
-if total_price < money:
-    print("残金は" + str(money - total_price) + "です")
-# # 合計金額が残金と等しい場合
-elif total_price == money:
-    print("残金は０です")
-# # 合計金額が残金より大きい場合
-elif total_price > money:
-    print("今の所持金では買えません")
+balance(money, total_price)
