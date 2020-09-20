@@ -3,7 +3,7 @@
 #買い物プログラム
 # クラスの応用
 # 関数の応用
-# 商品を複数選択
+# 買い物かごの内容を管理
 
 # 残金
 money = 0
@@ -73,6 +73,15 @@ def select_product():
     # 買い物かごに選んだ商品を追加
     cart_content = Cart_content(fruits[item], count)
     cart.append(cart_content)
+    # 買い物かごの内容を表示
+    decision = input("購入した商品を確認しますか？　（はい：０、いいえ：１）")
+    decision = int(decision)
+    if decision == 0:
+        for val in cart:
+            print(val.product.name + "単価 ￥" + str(val.product.price) + "\n購入数" + str(val.number))
+
+    # 買い物かごから中身を出す
+    
     # 購入を続けるか終わるかを選択する
     decision = input("商品の購入を続けますか？　（はい：０、いいえ：１）")
 
@@ -84,7 +93,7 @@ def select_product():
 select_product()
 
 for val in cart:
-    print(val.product.name + "単価 ￥" + str(val.product.price) + "購入数" + str(val.number))
+    print(val.product.name + "単価 ￥" + str(val.product.price) + "\n購入数" + str(val.number))
 
 # 合計金額
 total_price = 0
