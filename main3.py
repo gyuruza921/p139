@@ -11,6 +11,12 @@ money = 0
 # 購入した商品のリスト
 cart = []
 
+# 買い物かごの内容のクラス
+class Cart_content():
+    def __init__(self, product, number):
+        self.product = product
+        self.number = number
+
 # 商品毎の単価
 class Product():
     def __init__(self, name, price):
@@ -55,19 +61,38 @@ def balance(money, total_price):
 # 所持金を設定
 money = input("金額を入力してください")
 money = int(money)
-# 購入する商品を選択
-options = ["apple", "banana", "grape"]
-item = input("商品を選択してください（りんご：0、バナナ：1、ブドウ：2）")
-item = int(item)
-print(fruits[item].name + " ￥" + str(fruits[item].price))
 
-# 購入する個数を選択
-count = input("購入する個数を入力してください")
-count = int(count)
+# 商品の選択
+def select_product():
+    # 購入する商品を選択
+    item = input("商品を選択してください（りんご：0、バナナ：1、ブドウ：2）")
+    item = int(item)
+    # 購入する個数を選択
+    count = input("購入する個数を入力してください")
+    count = int(count)
+    # 買い物かごに選んだ商品を追加
+    cart_content = Cart_content(fruits[item], count)
+    cart.append(cart_content)
+    # 購入を続けるか終わるかを選択する
+    decision = input("商品の購入を続けますか？　（はい：０、いいえ：１）")
+
+    if decision == "0":
+        select_product()
+
+
+# 動作確認
+select_product()
+
+for val in cart:
+    print(val.product.name + "単価 ￥" + str(val.product.price) + "購入数" + str(val.number))
 
 # 合計金額
-total_price = fruits[item].price * count
-print(total_price)
+total_price = 0
+
+for val in cart:
+    total_price += val.product.price * val.number
+
+print("合計金額は￥" + str(total_price) + "です")
 
 # 結果を表示する
-print(balance(money, total_price)) 
+print(balance(money, total_price))
